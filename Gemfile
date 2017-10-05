@@ -22,6 +22,8 @@ gem 'bootstrap', '~> 4.0.0.beta'
 gem 'jquery-rails'
 gem 'devise'
 gem 'material_icons'
+gem 'font-awesome-sass'
+gem 'aws-sdk', '~> 2'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
