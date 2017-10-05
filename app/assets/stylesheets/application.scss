@@ -13,7 +13,41 @@
  */
 
 @import "bootstrap";
+@import "material_icons";
 
 body {
   padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+.material-icons {
+  vertical-align: middle;
+}
+
+
+/** PROFILE FORM CARDS **/
+.profile-card-body {
+  margin: 0px 10px;
+}
+
+/** SOCIAL MEDIA COLORS **/
+.facebook-colors {
+  background-color: #3b5998;
+}
+
+.youtube-colors {
+  background-color: #ff0000;
+}
+
+.twitter-colors {
+  background-color: #55acee;
+}
+
+.instagram-colors {
+  background-color: #e95950;
+}
+
+.facebook-colors, .youtube-colors, .twitter-colors, .instagram-colors {
+  font-weight: bold;
+  color: #fff;
 }

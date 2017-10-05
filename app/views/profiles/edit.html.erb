@@ -1,0 +1,122 @@
+<div class="row justify-content-center">
+  <!-- LEFT SIDE PROFILE -->
+  <div class="col-md-4">
+    <div class="card">
+      <h3 class="card-header">Profile Photo</h3>
+      <div class="card-body profile-card-body">
+        <div class="card profile-photo">
+          <!-- =================NEEDS TO BE COMPLETED================= -->
+          <%= image_tag "profile_avatar.png" %>
+          <!-- ======================================================= -->
+        </div><br>
+        <a href="#" class="btn btn-primary btn-block"><i class="material-icons md-light">add_a_photo</i> Upload a photo</a>
+      </div>
+    </div>
+  </div>
+  
+  <!-- RIGHT SIDE PROFILE -->
+  <div class="col-md-8">
+    <div class="row justify-content-center">
+      <div class="col-md-12">
+        <%= form_for(@profile) do |f| %>
+            <div>
+              <% if @profile.errors.any? %>
+                <div id="error_explanation">
+                  <div class="alert alert-danger">
+                    The form contains <%= pluralize(@profile.errors.count, "error") %>.
+                  </div>
+                  <ul>
+                  <% @profile.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                  <% end %>
+                  </ul>
+                </div>
+              <% end %>
+            </div>
+          
+          <!-- PERSONAL INFO SECTION -->
+          <div class="card">
+            <h3 class="card-header">Personal Info</h3>
+            <div class="card-body profile-card-body">
+              <div class="form-group row">
+                <div class="col-sm-6">
+                  Name: <%= f.text_field :name, class: "form-control", placeholder: "Your Name" %>
+                </div>
+                <div class="col-sm-6">
+                  Website: <%= f.text_field :website, class: "form-control", placeholder: "http://www.website.com" %>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  Bio: <%= f.text_area :bio, class: "form-control", :rows => "7", placeholder: "Something about yourself" %>
+                </div>
+              </div>
+              <div class="form-group row">
+              </div>
+            </div>
+          </div><br>
+          
+          <!-- SOCIAL MEDIA SECTION -->
+          <div class="card">
+            <h3 class="card-header">Social Media</h3>
+            <div class="card-body profile-card-body">
+              <div class="row justify-content-center">
+              <div class="col-md-10">
+              <!-- TWITTER USERNAME -->
+              <div class="form-group row">
+                <label for="twitterInputGroup" class="col-sm-3 col-form-label">Twitter: </label>
+                <div class="input-group mb-2 mb-sm-0 col-sm-9">
+                  <div class="input-group-addon twitter-colors">@</div>
+                  <%= f.text_field :twitter, class: "form-control", id: "twitterInputGroup", placeholder: "Username" %>
+                </div>
+              </div>
+              
+              <!-- FACEBOOK USERNAME -->
+              <div class="form-group row">
+                <label for="facebookInputGroup" class="col-sm-3 col-form-label">Facebook: </label>
+                <div class="input-group mb-2 mb-sm-0 col-sm-9">
+                  <div class="input-group-addon facebook-colors">facebook.com/</div>
+                  <%= f.text_field :twitter, class: "form-control", id: "facebookInputGroup", placeholder: "Username" %>
+                </div>
+              </div>
+            
+              <!-- YOUTUBE USERNAME -->
+              <div class="form-group row">
+                <label for="youtubeInputGroup" class="col-sm-3 col-form-label">Youtube: </label>
+                <div class="input-group mb-2 mb-sm-0 col-sm-9">
+                  <div class="input-group-addon youtube-colors">youtube.com/user/</div>
+                  <%= f.text_field :twitter, class: "form-control", id: "youtubeInputGroup", placeholder: "Username" %>
+                </div>
+              </div>
+              
+              <!-- INSTAGRAM USERNAME -->
+              <div class="form-group row">
+                <label for="instagramInputGroup" class="col-sm-3 col-form-label">Instagram: </label>
+                <div class="input-group mb-2 mb-sm-0 col-sm-9">
+                  <div class="input-group-addon instagram-colors">instagram.com/</div>
+                  <%= f.text_field :twitter, class: "form-control", id: "instagramInputGroup", placeholder: "Username" %>
+                </div>
+              </div>
+              </div>
+              </div>
+            </div>
+          </div><br>
+          
+          <!-- PERSONAL INFO SECTION -->
+          <div class="card">
+            <h3 class="card-header">Payment Info</h3>
+            <div class="card-body profile-card-body">
+              <p>To be used in the future for user payment information</p>
+            </div>
+          </div><br>
+            
+          <%= f.submit "Save changes", class: "btn btn-primary float-right" %>
+          <%= link_to "Back", :back, class: "btn btn-secondary float-right", style: "margin-right: 5px;" %>
+          
+        <% end %>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
