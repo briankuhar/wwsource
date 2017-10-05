@@ -16,6 +16,7 @@
             <a href="#" class="dropdown-item">Add a Project</a>
             <a href="#" class="dropdown-item">My Projects</a>
             <div class="dropdown-divider"></div>
+            <%= link_to "View My Profile", profile_path(current_user), class: "dropdown-item" %>
             <%= link_to "Change Password", edit_user_registration_path, class: "dropdown-item" %>
             <%= link_to "Edit Profile", edit_profile_path(current_user), class: "dropdown-item" %>
             <%= link_to "Logout", destroy_user_session_path, :method => :delete, class: "dropdown-item" %>

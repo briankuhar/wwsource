@@ -14,6 +14,8 @@
 
 @import "bootstrap";
 @import "material_icons";
+@import "font-awesome-sprockets";
+@import "font-awesome";
 
 body {
   padding-top: 60px;
@@ -45,6 +47,22 @@ body {
 
 .instagram-colors {
   background-color: #e95950;
+}
+
+.facebook-color {
+  color: #3b5998;
+}
+
+.youtube-color {
+  color: #ff0000;
+}
+
+.twitter-color {
+  color: #55acee;
+}
+
+.instagram-color {
+  color: #e95950;
 }
 
 .facebook-colors, .youtube-colors, .twitter-colors, .instagram-colors {

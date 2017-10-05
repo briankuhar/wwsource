@@ -1,3 +1,95 @@
-
-<h1>Profile#show</h1>
-<p>Find me in app/views/profiles/show.html.erb</p>
+<div class="row justify-content-center">
+  <!-- LEFT SIDE PROFILE -->
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body profile-card-body">
+        <div class="card profile-photo">
+          <!-- =================NEEDS TO BE COMPLETED================= -->
+          <%= image_tag "profile_avatar.png" %>
+          <!-- ======================================================= -->
+        </div>
+      </div>
+    </div><br>
+    <!-- USER STATS SECTION -->
+    <div class="card">
+      <h3 class="card-header">STATS</h3>
+      <div class="card-body profile-card-body">
+        <p>List projects made, badges, projects uploaded, project downloads...</p>
+        <ul>
+          <li>Projets Uploaded - 6</li>
+          <li>Project Likes - 175</li>
+          <li>Comments - 54</li>
+        </ul>
+      </div>
+    </div><br>
+    <!-- DONATE SECTION -->
+    <div class="card">
+      <h3 class="card-header">Donate</h3>
+      <div class="card-body profile-card-body">
+        <p>To be used in the future for user donations</p>
+      </div>
+    </div><br>
+  </div>
+  
+  <!-- RIGHT SIDE PROFILE -->
+  <div class="col-md-8">
+    <div class="row justify-content-center">
+      <div class="col-md-12">
+            
+          <!-- PERSONAL INFO SECTION -->
+          <div class="card">
+            <h3 class="card-header"><%= @profile.name %> <span class="float-right">
+              <!-- Show and hide social icons if values are entered -->
+              <% unless @profile.twitter.nil? || @profile.twitter == "" %>
+                <a href="http://www.twitter.com/<%= @profile.twitter %>" target="_blank">
+                <i class="fa fa-twitter twitter-color" aria-hidden="true"></i></a>
+              <% end %>
+              <% unless @profile.facebook.nil? || @profile.facebook == "" %>
+                <a href="http://www.facebook.com/<%= @profile.facebook %>" target="_blank">
+                <i class="fa fa-facebook facebook-color"></i></a>
+              <% end %>
+              <% unless @profile.youtube.nil? || @profile.youtube == "" %>
+                <a href="http://www.youtube.com/user/<%= @profile.youtube %>" target="_blank">
+                <i class="fa fa-youtube youtube-color"></i></a>
+                <% end %>
+              <% unless @profile.instagram.nil? || @profile.instagram == "" %>
+                <a href="http://www.instagram.com/<%= @profile.instagram %>" target="_blank">
+                <i class="fa fa-instagram instagram-color"></i></a>
+                <% end %>
+            </span></h3>
+            <div class="card-body profile-card-body">
+              <p><%= @profile.bio %></p>
+              <a href="<%= @profile.website %>" class="btn btn-primary btn-sm btn-block" target="_blank"><i class="material-icons">public</i> Visit My Website</a>
+            </div>
+          </div><br>
+          
+          <!-- PROJECTS SECTION -->
+          <div class="card">
+            <h3 class="card-header"><%= @profile.name %>'s Projects</h3>
+              <div class="card-body">
+              <div class="card-deck">
+                <% 6.times do %>
+                  <div class="col-sm-4" style="padding:0px;">
+                  <div class="card">
+                    <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+                    <img class="card-img-top img-fluid" src="//placehold.it/220x200" alt="Card image cap">
+                    <div class="card-body">
+                      <h4 class="card-title">Card title</h4>
+                      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                  </div><br>
+                  </div>
+                <% end %>
+              </div>
+              </div>
+          </div><br>
+          
+            
+          <%= link_to "Back", :back, class: "btn btn-secondary float-right", style: "margin-right: 5px;" %>
+          
+        
+      </div>
+    </div>
+  </div>
+</div>
