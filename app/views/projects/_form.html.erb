@@ -1,37 +1,63 @@
-<%= form_with(model: project, local: true) do |form| %>
-  <% if project.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
-
-      <ul>
-      <% project.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+<div class="row">
+  <div class="col-md-4">
+    <div class="card">
+      <h3 class="card-header">Cover Photo</h3>
+      <div class="card-body profile-card-body">
+        <div class="card profile-photo">
+          <!-- =================NEEDS TO BE COMPLETED================= -->
+          <img class="card-img-top img-fluid" src="//placehold.it/200x200" alt="Card image cap">
+          <!-- ======================================================= -->
+        </div><br>
+        <a href="#" class="btn btn-primary btn-block"><i class="material-icons md-light">add_a_photo</i> Upload a photo</a>
+      </div>
+    </div><!-- card -->
+  </div><!-- col-md-4 -->
+  
+  <div class="col-md-8">
+    <%= form_with(model: project, local: true) do |f| %>
+      <% if project.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
+    
+          <ul>
+          <% project.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
+    <div class="card">
+      <h3 class="card-header">Project Summary</h3>
+      <div class="card-body profile-card-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <%= f.label :project_name %>
+              <%= f.text_field :project_name, id: :project_project_name, class: "form-control" %>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <%= f.label :project_difficulty %>
+              <% options = options_from_collection_for_select(@list, 'id', 'level') %>
+              <%= f.select :project_difficulty, options, {}, class: "form-control" %>
+            </div>
+          </div>
+        </div><!-- row -->
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <%= f.label :project_description %>
+              <%= f.text_area :project_description, id: :project_project_description, class: "form-control", rows: "7" %>
+            </div>
+          </div>
+        </div>
+      </div><!-- card-body -->
+    </div><!-- card --><br>
+    <%= f.submit class: "btn btn-primary float-right" %>
+    <%= link_to "Back", :back, class: "btn btn-secondary float-right", style: "margin-right:5px;" %>
+    
+    <% end %>
+  </div><!-- col-md-8 -->
+</div><!-- row -->
 
-  <div class="field">
-    <%= form.label :project_name %>
-    <%= form.text_field :project_name, id: :project_project_name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :project_description %>
-    <%= form.text_area :project_description, id: :project_project_description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :project_difficulty %>
-    <%= form.text_field :project_difficulty, id: :project_project_difficulty %>
-  </div>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id, id: :project_user_id %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>

@@ -14,7 +14,9 @@ class ProjectsController < ApplicationController
 
   # GET /projects/new
   def new
-    @project = Project.new
+    @user = current_user
+    @project = @user.projects.new
+    @list = DifficultyLevel.all
   end
 
   # GET /projects/1/edit
@@ -24,16 +26,15 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.json
   def create
-    @project = Project.new(project_params)
+    @user = current_user
+    @project = @user.project.new(project_params)
 
-    respond_to do |format|
-      if @project.save
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
-        format.json { render :show, status: :created, location: @project }
-      else
-        format.html { render :new }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
-      end
+    if @project.save?
+      flash[:success] = "Project created successfully"
+      redirect_to edit_project_path(@project)
+    else
+      flash[:error] = "There was a problem with your upload"
+      render 'new'
     end
   end
 
