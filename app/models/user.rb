@@ -8,6 +8,8 @@ class User < ApplicationRecord
   
   after_create :create_and_associate_profile, on: :create
   
+
+  
   private
   
     def create_and_associate_profile

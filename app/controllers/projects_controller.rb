@@ -10,6 +10,8 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
+    @project = Project.find(params[:id])
+    @materials = @project.materials.all
   end
 
   # GET /projects/new
@@ -21,15 +23,17 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
+    
+    @list = DifficultyLevel.all
   end
 
   # POST /projects
   # POST /projects.json
   def create
     @user = current_user
-    @project = @user.project.new(project_params)
+    @project = @user.projects.new(project_params)
 
-    if @project.save?
+    if @project.save!
       flash[:success] = "Project created successfully"
       redirect_to edit_project_path(@project)
     else
@@ -41,14 +45,11 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
-    respond_to do |format|
-      if @project.update(project_params)
-        format.html { redirect_to @project, notice: 'Project was successfully updated.' }
-        format.json { render :show, status: :ok, location: @project }
-      else
-        format.html { render :edit }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
-      end
+    if @project.update(project_params)
+      flash[:success] = "Project successfully updated"
+      redirect_to project_path(@project)
+    else
+      render 'edit'
     end
   end
 
@@ -61,6 +62,7 @@ class ProjectsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -70,6 +72,8 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:project_name, :project_description, :project_difficulty, :user_id)
+      params.require(:project).permit(:project_name, :project_description, :project_difficulty, :user_id, {:materials => [:id, :material, :matl_type, :qty, :notes]})
     end
+    
+
 end

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  material: MyString
+  type: 
+  qty: 1
+  notes: MyText
+  project: one
+
+two:
+  material: MyString
+  type: 
+  qty: 1
+  notes: MyText
+  project: two
