@@ -1,54 +1,59 @@
 <div class="row">
   <div class="col-md-4">
-    <div class="card">
-      <h3 class="card-header">Cover Photo</h3>
-      <div class="card-body profile-card-body">
         <div class="card profile-photo">
           <!-- =================NEEDS TO BE COMPLETED================= -->
           <img class="card-img-top img-fluid" src="//placehold.it/200x200" alt="Card image cap">
           <!-- ======================================================= -->
         </div><br>
-        <a href="#" class="btn btn-primary btn-block"><i class="material-icons md-light">add_a_photo</i> Upload a photo</a>
-      </div>
-    </div><!-- card -->
   </div><!-- col-md-4 -->
   
   <div class="col-md-8">
     <div class="card">
-      <h3 class="card-header">Project Summary</h3>
+      <h3 class="card-header"><%= @project.project_name %></h3>
       <div class="card-body profile-card-body">
         <div class="row">
-          
-        </div><!-- row -->
+          <div class="col-sm-12">
+            <h4><%= DifficultyLevel.find(@project.project_difficulty).level %> </h4>
+          </div>
+        </div><!-- row --><br>
         <div class="row">
-          
+          <div class="col-sm-12">
+            <p><strong>Description: </strong> <%= @project.project_description %></p>
+          </div>
         </div>
       </div><!-- card-body -->
     </div><!-- card --><br>
   </div><!-- col-md-8 -->
-</div><!-- row -->
+</div><!-- row --><br>
 
 <div class="row">
-  <h2>Materials</h2>
-  
-  <table class="table table-striped table-hover">
-    <thead class="thead-inverse">
-      <tr>
-        <th>Material</th>
-        <th>Material Type</th>
-        <th>Material Qty</th>
-        <th>Notes</th>
-      </tr>
-    </thead>
-    <% @materials.each do |m| %>
-      <tr>
-        <td><%= m.material %></td>
-        <td><%= m.matl_type %></td>
-        <td><%= m.qty %></td>
-        <td><%= m.notes %></td>
-      </tr>
-    <% end %>
-  </table>
+  <div class="col-md-12">
+    <div class="card">
+      <h2 class="card-header">Materials</h2>
+      <div class="card-body profile-card-body">
+        <table class="table table-striped table-hover">
+          <thead class="thead-inverse">
+            <tr>
+              <th>Material</th>
+              <th>Material Type</th>
+              <th>Material Qty</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <% @materials.each do |m| %>
+            <tr>
+              <td><%= m.material %></td>
+              <td><%= m.matl_type %></td>
+              <td><%= m.qty %></td>
+              <td><%= m.notes %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
-<%= link_to 'Edit', edit_project_path(@project) %> |
+<% unless current_user.nil? || @project.user_id != current_user.id %>
+  <%= link_to 'Edit', edit_project_path(@project) %> |
+<% end %>
 <%= link_to 'Back', projects_path %>
