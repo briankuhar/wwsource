@@ -23,6 +23,7 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'material_icons'
 gem 'font-awesome-sass'
+gem 'paperclip'
 gem 'aws-sdk', '~> 2'
 gem 'nested_form'
 
