@@ -89,8 +89,16 @@
               </div><!-- form-row -->
             <% end %>
             <p><%= f.link_to_add '<i class="fa fa-plus" aria-hidden="true"></i> Add a material'.html_safe, :materials, class: "btn btn-success" %></p>
-
         </div>
+      </div><!-- card --><br>
+      <div class="card">
+        <h3 class="card-header">Project Details</h3>
+        <div class="card-body profile-card-body">
+          <div class="form-group col-md-12">
+            <%= f.label :instructions %>
+            <%= f.text_area :instructions, class:"form-control" %>
+          </div>
+        </div><!-- card-body -->
       </div><!-- card -->
     </div>
   </div><!-- row --><br>

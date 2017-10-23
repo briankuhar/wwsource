@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171017214017) do
+ActiveRecord::Schema.define(version: 20171023214927) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,14 @@ ActiveRecord::Schema.define(version: 20171017214017) do
     t.string "difficulty_level"
   end
 
+  create_table "project_instructions", force: :cascade do |t|
+    t.text "instructions"
+    t.bigint "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_project_instructions_on_project_id"
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string "project_name"
     t.text "project_description"
@@ -58,6 +66,7 @@ ActiveRecord::Schema.define(version: 20171017214017) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "instructions"
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
@@ -88,6 +97,7 @@ ActiveRecord::Schema.define(version: 20171017214017) do
 
   add_foreign_key "materials", "projects"
   add_foreign_key "profiles", "users"
+  add_foreign_key "project_instructions", "projects"
   add_foreign_key "projects", "users"
   add_foreign_key "steps", "projects"
 end
