@@ -12,19 +12,22 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
     @materials = @project.materials.all
+    @creator = User.find(@project.user_id)
   end
 
   # GET /projects/new
   def new
     @user = current_user
     @project = @user.projects.new
-    @list = DifficultyLevel.all
+    @difficulty_list = DifficultyLevel.all
+    @materials_list = MaterialType.all
   end
 
   # GET /projects/1/edit
   def edit
     
-    @list = DifficultyLevel.all
+    @difficulty_list = DifficultyLevel.all
+    @materials_list = MaterialType.all
   end
 
   # POST /projects
@@ -61,6 +64,10 @@ class ProjectsController < ApplicationController
       format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+  
+  def last_updated
+    Project.find(params[:id]).updated_at.strftime("%m/%d/%Y")
   end
   
 

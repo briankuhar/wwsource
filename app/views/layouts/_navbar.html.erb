@@ -13,8 +13,8 @@
             <%= current_user.email %>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <%= link_to "Add a Project", new_project_path, class: "dropdown-item" %>
-            <a href="#" class="dropdown-item">My Projects</a>
+            <%= link_to "Create a Project", new_project_path, class: "dropdown-item" %>
+            <a href="#" class="dropdown-item">View My Projects</a>
             <div class="dropdown-divider"></div>
             <%= link_to "View My Profile", profile_path(current_user), class: "dropdown-item" %>
             <%= link_to "Edit Profile", edit_profile_path(current_user), class: "dropdown-item" %>

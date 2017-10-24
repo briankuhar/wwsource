@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171023214927) do
+ActiveRecord::Schema.define(version: 20171024215910) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,12 @@ ActiveRecord::Schema.define(version: 20171023214927) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "level"
+  end
+
+  create_table "material_types", force: :cascade do |t|
+    t.string "matl_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "materials", force: :cascade do |t|
@@ -67,6 +73,7 @@ ActiveRecord::Schema.define(version: 20171023214927) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "instructions"
+    t.string "youtube_link"
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 

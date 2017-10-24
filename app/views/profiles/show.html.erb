@@ -67,21 +67,21 @@
           <div class="card">
             <h3 class="card-header"><%= @profile.name %>'s Projects</h3>
               <div class="card-body">
-              <div class="card-deck">
-                <% 6.times do %>
-                  <div class="col-sm-4" style="padding:0px;">
-                  <div class="card">
-                    <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
-                    <img class="card-img-top img-fluid" src="//placehold.it/220x200" alt="Card image cap">
-                    <div class="card-body">
-                      <h4 class="card-title">Card title</h4>
-                      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                <div class="card-deck">
+                  <% @user.projects.each do |project| %>
+                    <div class="col-sm-4" style="padding:0px;">
+                      <div class="card">
+                        <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+                        <img class="card-img-top img-fluid" src="//placehold.it/220x200" alt="Card image cap">
+                        <div class="card-body">
+                          <h5 class="card-title"><%= link_to project.project_name, project_path(project) %></h5>
+                          <p class="card-text"><%= truncate(project.project_description, :length => 100) %></p>
+                          <p class="card-text"><small class="text-muted">Last updated: <%= project.updated_at.strftime("%m/%d/%Y") %></small></p>
+                        </div>
+                      </div><br>
                     </div>
-                  </div><br>
-                  </div>
-                <% end %>
-              </div>
+                  <% end %>  
+                </div>
               </div>
           </div><br>
           

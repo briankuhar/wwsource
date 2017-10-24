@@ -1,15 +1,28 @@
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-3">
         <div class="card profile-photo">
           <!-- =================NEEDS TO BE COMPLETED================= -->
           <img class="card-img-top img-fluid" src="//placehold.it/200x200" alt="Card image cap">
           <!-- ======================================================= -->
         </div><br>
+        <div class="card">
+          <h4 class="card-header">Vitals</h4>
+          <div class="card-body profile-card-body">
+            <p><strong>Creator: </strong><%= link_to @creator.profile.name, profile_path(@creator) %></p>
+            <p><strong>Downloads: </strong>297</p>
+            <p><strong>Average Rating: </strong>4.7 / 5</p>
+            <a href="#" class="btn btn-primary btn-block">Download Plans</a>
+          </div>
+        </div>
   </div><!-- col-md-4 -->
   
-  <div class="col-md-8">
+  <div class="col-md-9">
     <div class="card">
-      <h3 class="card-header"><%= @project.project_name %></h3>
+      <h3 class="card-header"><%= @project.project_name %>
+        <% unless current_user.nil? || @project.user_id != current_user.id %>
+          <span class="float-right"><%= link_to 'Edit Project', edit_project_path(@project), class:"small" %></span>
+        <% end %>
+      </h3>
       <div class="card-body profile-card-body">
         <div class="row">
           <div class="col-sm-12">
@@ -23,37 +36,52 @@
         </div>
       </div><!-- card-body -->
     </div><!-- card --><br>
-  </div><!-- col-md-8 -->
-</div><!-- row --><br>
-
-<div class="row">
-  <div class="col-md-12">
     <div class="card">
       <h2 class="card-header">Materials</h2>
       <div class="card-body profile-card-body">
-        <table class="table table-striped table-hover">
-          <thead class="thead-inverse">
-            <tr>
-              <th>Material</th>
-              <th>Material Type</th>
-              <th>Material Qty</th>
-              <th>Notes</th>
-            </tr>
-          </thead>
+        <table class="table table-hover">
+          <!--<thead style="background-color:#ead7bc;">-->
+          <!--  <tr>-->
+          <!--    <th>Material</th>-->
+          <!--    <th>Material Type</th>-->
+          <!--    <th>Material Qty</th>-->
+          <!--    <th>Notes</th>-->
+          <!--  </tr>-->
+          <!--</thead>-->
           <% @materials.each do |m| %>
             <tr>
               <td><%= m.material %></td>
-              <td><%= m.matl_type %></td>
+              <td><%= MaterialType.find(m.matl_type).matl_type %></td>
               <td><%= m.qty %></td>
               <td><%= m.notes %></td>
             </tr>
           <% end %>
         </table>
       </div>
-    </div>
+    </div><!-- card -->
+  </div><!-- col-md-8 -->
+</div><!-- row --><br>
+
+<div class="row">
+  <div class="col-md-4">
+    
   </div>
-</div>
-<% unless current_user.nil? || @project.user_id != current_user.id %>
-  <%= link_to 'Edit', edit_project_path(@project) %> |
+  <div class="col-md-8">
+    
+  </div><!-- col -->
+</div><!-- row --><br>
+
+<% unless @project.instructions.nil? %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <h3 class="card-header">Project Details</h3>
+        <div class="card-body profile-card-body">
+          <div class="fr-view">
+            <%= @project.instructions.html_safe %>
+          </div>
+        </div>
+      </div><!-- card -->
+    </div><!-- col -->
+  </div><!-- row -->
 <% end %>
-<%= link_to 'Back', projects_path %>
