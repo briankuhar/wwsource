@@ -1,32 +1,43 @@
 <div class="row">
   <div class="col-md-3">
-        <div class="card profile-photo">
-          <!-- =================NEEDS TO BE COMPLETED================= -->
-          <img class="card-img-top img-fluid" src="//placehold.it/200x200" alt="Card image cap">
-          <!-- ======================================================= -->
-        </div><br>
-        <div class="card">
-          <h4 class="card-header">Vitals</h4>
-          <div class="card-body profile-card-body">
-            <p><strong>Creator: </strong><%= link_to @creator.profile.name, profile_path(@creator) %></p>
-            <p><strong>Downloads: </strong>297</p>
-            <p><strong>Average Rating: </strong>4.7 / 5</p>
-            <a href="#" class="btn btn-primary btn-block">Download Plans</a>
-          </div>
-        </div>
-  </div><!-- col-md-4 -->
+    <div class="card profile-photo">
+      <!-- =================NEEDS TO BE COMPLETED================= -->
+      <img class="card-img-top img-fluid" src="//placehold.it/200x200" alt="Card image cap">
+      <!-- ======================================================= -->
+    </div><br>
+    <div class="card">
+      <h4 class="card-header">Vitals</h4>
+      <div class="card-body profile-card-body">
+        <p><strong>Creator: </strong><%= link_to @creator.profile.name, profile_path(@creator) %></p>
+        <p><strong>Downloads: </strong>297</p>
+        <p><strong>Average Rating: </strong>4.7 / 5</p>
+        <a href="#" class="btn btn-primary btn-block">Download Plans</a>
+      </div>
+    </div><br>
+    
+    <div class="card">
+      <h4 class="card-header">Share</h3>
+      <div class="card-body profile-card-body">
+      </div>
+    </div><!-- card -->
+  </div><!-- col-md-3 -->
+  
   
   <div class="col-md-9">
+    
+    <!-- ================= DETAILS ================= -->
+    <!-- ================= DETAILS ================= -->
+    <!-- ================= DETAILS ================= -->
     <div class="card">
-      <h3 class="card-header"><%= @project.project_name %>
+      <h4 class="card-header"><%= @project.project_name %>
         <% unless current_user.nil? || @project.user_id != current_user.id %>
           <span class="float-right"><%= link_to 'Edit Project', edit_project_path(@project), class:"small" %></span>
         <% end %>
-      </h3>
+      </h4>
       <div class="card-body profile-card-body">
         <div class="row">
           <div class="col-sm-12">
-            <h4><%= DifficultyLevel.find(@project.project_difficulty).level %> </h4>
+            <h5>Difficulty: <%= DifficultyLevel.find(@project.project_difficulty).level %> </h5>
           </div>
         </div><!-- row --><br>
         <div class="row">
@@ -34,20 +45,21 @@
             <p><strong>Description: </strong> <%= @project.project_description %></p>
           </div>
         </div>
+        <% unless @project.youtube_link.nil? %>
+          <div class="videoWrapper">
+              <iframe width="100%" height="444" src="<%= "https://www.youtube.com/embed/" + @project.youtube_id.to_s %>" frameborder="0" allowfullscreen class="youtube-centered"></iframe>
+          </div><br>
+        <% end %>
       </div><!-- card-body -->
     </div><!-- card --><br>
+    
+    <!-- ================= MATERIALS ================= -->
+    <!-- ================= MATERIALS ================= -->
+    <!-- ================= MATERIALS ================= -->
     <div class="card">
-      <h2 class="card-header">Materials</h2>
+      <h4 class="card-header">Materials</h4>
       <div class="card-body profile-card-body">
         <table class="table table-hover">
-          <!--<thead style="background-color:#ead7bc;">-->
-          <!--  <tr>-->
-          <!--    <th>Material</th>-->
-          <!--    <th>Material Type</th>-->
-          <!--    <th>Material Qty</th>-->
-          <!--    <th>Notes</th>-->
-          <!--  </tr>-->
-          <!--</thead>-->
           <% @materials.each do |m| %>
             <tr>
               <td><%= m.material %></td>
@@ -58,30 +70,35 @@
           <% end %>
         </table>
       </div>
-    </div><!-- card -->
-  </div><!-- col-md-8 -->
-</div><!-- row --><br>
-
-<div class="row">
-  <div class="col-md-4">
+    </div><!-- card --><br>
     
-  </div>
-  <div class="col-md-8">
-    
-  </div><!-- col -->
-</div><!-- row --><br>
-
-<% unless @project.instructions.nil? %>
-  <div class="row">
-    <div class="col-md-12">
+    <!-- ================= INSTRUCTIONS ================= -->
+    <!-- ================= INSTRUCTIONS ================= -->
+    <!-- ================= INSTRUCTIONS ================= -->
+    <% unless @project.instructions.nil? %>
       <div class="card">
-        <h3 class="card-header">Project Details</h3>
+        <h4 class="card-header">Project Details</h3>
         <div class="card-body profile-card-body">
-          <div class="fr-view">
+          <div>
             <%= @project.instructions.html_safe %>
           </div>
         </div>
-      </div><!-- card -->
-    </div><!-- col -->
-  </div><!-- row -->
-<% end %>
+      </div><!-- card --><br>
+    <% end %>
+    
+    <!-- ================= COMMENTS ================= -->
+    <!-- ================= COMMENTS ================= -->
+    <!-- ================= COMMENTS ================= -->
+    <div class="card">
+      <h4 class="card-header">Comments</h3>
+      <div class="card-body profile-card-body">
+      </div>
+    </div><!-- card -->
+  </div><!-- col-md-9 -->
+</div><!-- row --><br>
+
+
+
+
+
+

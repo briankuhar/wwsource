@@ -35,23 +35,27 @@ class ProjectsController < ApplicationController
   def create
     @user = current_user
     @project = @user.projects.new(project_params)
+    
+    @project.youtube_id = parse_youtube(@project.youtube_link)
 
     if @project.save!
       flash[:success] = "Project created successfully"
       redirect_to edit_project_path(@project)
     else
       flash[:error] = "There was a problem with your upload"
-      render 'new'
+      redirect_to edit_project_path(@project)
     end
   end
 
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
+    @project.youtube_id = parse_youtube(@project.youtube_link)
     if @project.update(project_params)
       flash[:success] = "Project successfully updated"
       redirect_to project_path(@project)
     else
+      flash[:error] = "There was a problem with your upload"
       render 'edit'
     end
   end
@@ -66,9 +70,11 @@ class ProjectsController < ApplicationController
     end
   end
   
-  def last_updated
-    Project.find(params[:id]).updated_at.strftime("%m/%d/%Y")
+  def parse_youtube url
+     regex = /(?:.be\/|\/watch\?v=|\/(?=p\/))([\w\/\-]+)/
+     url.match(regex)[1]
   end
+  
   
 
   private
@@ -79,7 +85,7 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:project_name, :project_description, :project_difficulty, :instructions, :user_id, 
+      params.require(:project).permit(:project_name, :project_description, :project_difficulty, :youtube_link, :youtube_id, :instructions, :user_id, 
                 materials_attributes: [:id, :material, :matl_type, :qty, :notes, :_destroy])
     end
     
