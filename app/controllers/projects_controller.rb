@@ -13,6 +13,9 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     @materials = @project.materials.all
     @creator = User.find(@project.user_id)
+    
+    @iscreator = (@creator == current_user)
+    puts @iscreator
   end
 
   # GET /projects/new

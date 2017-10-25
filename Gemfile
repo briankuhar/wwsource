@@ -23,7 +23,7 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'material_icons'
 gem 'font-awesome-sass'
-gem 'paperclip'
+gem 'paperclip', git: "git://github.com/thoughtbot/paperclip.git"
 gem 'aws-sdk', '~> 2'
 gem 'nested_form'
 

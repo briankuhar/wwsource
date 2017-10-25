@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :projects, dependent: :destroy
   
   after_create :create_and_associate_profile, on: :create
-  
+
 
   
   private
