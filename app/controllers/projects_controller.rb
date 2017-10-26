@@ -4,7 +4,17 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+    @projects = Project.where("user_id = ?", current_user.id)
+    
+    if params[:search]
+      @projects = Project.search(params[:search]).where("user_id = ?", current_user.id)
+    else
+      @projects = Project.where("user_id = ?", current_user.id)
+    end
+    
+    if params[:sort_param]
+      @projects = @projects.order("#{params[:sort_param]}")
+    end
   end
 
   # GET /projects/1

@@ -1,33 +1,74 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Projects</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Project name</th>
-      <th>Project description</th>
-      <th>Project difficulty</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @projects.each do |project| %>
-      <tr>
-        <td><%= project.project_name %></td>
-        <td><%= project.project_description %></td>
-        <td><%= project.project_difficulty %></td>
-        <td><%= project.user %></td>
-        <td><%= link_to 'Show', project %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<h1>My Projects</h1><hr>
 
+<div class="row">
+  
+  <div class="col-md-9">
+    <div class="card-deck">
+      <% @projects.each do |project| %>
+        <div class="col-md-4" style="padding: 20px 5px 20px 5px;">
+          <div class="card h-100">
+            <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+            <img class="card-img-top img-fluid" src="//placehold.it/220x200" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title"><%= link_to project.project_name, project_path(project) %></h5>
+              <p class="card-text"><%= truncate(project.project_description, :length => 100) %></p>
+              <p class="card-text"><small class="text-muted">Created: <%= project.created_at.strftime("%m/%d/%Y") %></small><br>
+              <small class="text-muted">Last updated: <%= project.updated_at.strftime("%m/%d/%Y") %></small></p>
+            </div>
+            <div class="card-footer">
+              <div class="row" style="text-align:center;">
+                <div class="col-sm-4">
+                  <%= link_to '<i class="fa fa-eye" aria-hidden="true"></i>'.html_safe, project, class:"edit-style" %>
+                </div>
+                <div class="col-sm-4">
+                  <%= link_to '<i class="fa fa-pencil-square-o" aria-hidden="true"></i>'.html_safe, edit_project_path(project), class:"edit-style" %>
+                </div>
+                <div class="col-sm-4">
+                  <%= link_to '<i class="fa fa-trash-o" aria-hidden="true"></i>'.html_safe, project, method: :delete, data: { confirm: 'Are you sure?' }, class:"edit-style" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div><br>
+      <% end %>  
+    </div><!-- card-deck -->
+  </div><!-- col-md-9 -->
+  
+  <div class="col-md-3">
+    <div class="card">
+      <h4 class="card-header">Search and Filters</h4>
+      <div class="card-body">
+        <%= form_tag projects_path, :method => "get", id: "search-form" do %>
+          <div class="input-group">
+            <%= text_field_tag :search, params[:search], placeholder: "Search Projects", class:"form-control" %><br />
+            <button type="submit", class="btn btn-success input-group-addon">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+          </div>
+        <% end %>
+        <hr>
+        <h5>Sort By</h5>
+        <p>Project Name: <%= link_to 'a-z', projects_path(:sort_param => "project_name ASC") %> | 
+                         <%= link_to 'z-a', projects_path(:sort_param => "project_name DESC") %>
+        </p>
+        <p>Date Created: <%= link_to 'Newest', projects_path(:sort_param => "created_at DESC") %> | 
+                         <%= link_to 'Oldest', projects_path(:sort_param => "created_at ASC") %>
+        </p>
+      </div>
+    </div><!-- card --><br />
+    
+    <div class="card">
+      <h4 class="card-header">Project Actions</h4>
+      <div class="card-body">
+        <%= link_to 'Create a Project', new_project_path %>
+      </div>
+    </div>
+  </div><!-- col-md-3 -->
+
+</div>
 <br>
 
-<%= link_to 'New Project', new_project_path %>
