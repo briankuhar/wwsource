@@ -2,8 +2,10 @@ class ProfilesController < ApplicationController
   def update
     @user = current_user
     @profile = @user.profile
+    avatar_upload = AvatarUploader.new
     
     if @profile.update_attributes!(profile_params)
+      avatar_upload.store!(@profile.avatar) unless @profile.avatar.nil?
       flash[:success] = "Success"
       redirect_to edit_profile_path(current_user)
       puts @profile.name + " " + @profile.bio
@@ -13,7 +15,7 @@ class ProfilesController < ApplicationController
   end
 
   def edit
-    @profile = current_user.profile
+    @profile = Profile.find(params[:id])
     puts @profile.name
     puts User.find(4).profile.name
     puts "---------------"
@@ -23,13 +25,20 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    @user = current_user
-    @profile = @user.profile
+    @profile = Profile.find(params[:id])
+    @user = User.find(@profile.user_id)
+  end
+  
+  def remove_image
+    @profile = Profile.find(params[:id])
+    @profile.remove_avatar!
+    @profile.save  
+    redirect_to edit_profile_path(@profile)
   end
   
   private
     
     def profile_params
-      params.require(:profile).permit(:name, :youtube, :facebook, :twitter, :instagram, :website, :bio, :contact)
+      params.require(:profile).permit(:name, :youtube, :facebook, :twitter, :instagram, :website, :bio, :contact, :avatar)
     end
 end

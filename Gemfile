@@ -23,9 +23,9 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'material_icons'
 gem 'font-awesome-sass'
-gem 'paperclip', git: "git://github.com/thoughtbot/paperclip.git"
 gem 'aws-sdk', '~> 2'
 gem 'carrierwave', '~> 1.0'
+gem "fog-aws"
 gem 'nested_form'
 
 group :development, :test do
