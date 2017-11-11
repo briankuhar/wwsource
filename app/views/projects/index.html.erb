@@ -4,12 +4,13 @@
 
 <h1>My Projects</h1><hr>
 
+<%= will_paginate @proejcts, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
 <div class="row">
   
   <div class="col-md-9">
     <div class="card-deck">
       <% @projects.each do |project| %>
-        <div class="col-md-4" style="padding: 20px 5px 20px 5px;">
+        <div class="col-md-4">
           <div class="card h-100">
             <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
             <img class="card-img-top img-fluid" src="//placehold.it/220x200" alt="Card image cap">
@@ -70,5 +71,7 @@
   </div><!-- col-md-3 -->
 
 </div>
+
+<%= will_paginate @proejcts, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
 <br>
 

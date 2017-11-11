@@ -24,6 +24,15 @@ body {
   padding-bottom: 60px;
 }
 
+// a, a:visited {
+//   color: #2c6094;
+// }
+
+// a:hover {
+//   color: #558abf;
+//   text-decoration: none;
+// }
+
 .material-icons {
   vertical-align: middle;
 }
@@ -82,4 +91,9 @@ body {
 .edit-style {
   color: #666666;
   padding-left: 5px;
+}
+
+
+.card-deck > .col-md-4 {
+  padding: 0px 0px 20px 0px !important;
 }

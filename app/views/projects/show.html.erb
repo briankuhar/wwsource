@@ -51,7 +51,7 @@
             <p><strong>Description: </strong> <%= @project.project_description %></p>
           </div>
         </div><br>
-        <% unless @project.youtube_link.nil? %>
+        <% unless @project.youtube_link.nil? || @project.youtube_link == '' %>
           <div class="videoWrapper">
               <iframe width="100%" height="444" src="<%= "https://www.youtube.com/embed/" + @project.youtube_id.to_s %>" frameborder="0" allowfullscreen class="youtube-centered"></iframe>
           </div><br>

@@ -4,12 +4,12 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.where("user_id = ?", current_user.id)
+    @projects = Project.where("user_id = ?", current_user.id).paginate(:page => params[:page], :per_page => 9)
     
     if params[:search]
-      @projects = Project.search(params[:search]).where("user_id = ?", current_user.id)
+      @projects = Project.search(params[:search]).where("user_id = ?", current_user.id).paginate(:page => params[:page], :per_page => 9)
     else
-      @projects = Project.where("user_id = ?", current_user.id)
+      @projects = Project.where("user_id = ?", current_user.id).paginate(:page => params[:page], :per_page => 9)
     end
     
     if params[:sort_param]
@@ -49,13 +49,15 @@ class ProjectsController < ApplicationController
     @user = current_user
     @project = @user.projects.new(project_params)
     
-    @project.youtube_id = parse_youtube(@project.youtube_link)
+    unless @project.youtube_link.nil?
+      @project.youtube_id = parse_youtube(@project.youtube_link)
+    end
 
     if @project.save!
       flash[:success] = "Project created successfully"
-      redirect_to edit_project_path(@project)
+      redirect_to project_path(@project)
     else
-      flash[:error] = "There was a problem with your upload"
+      flash[:error] = "There was a problem with your submission"
       redirect_to edit_project_path(@project)
     end
   end
@@ -84,8 +86,10 @@ class ProjectsController < ApplicationController
   end
   
   def parse_youtube url
+    unless url == '' || url.nil?
      regex = /(?:.be\/|\/watch\?v=|\/(?=p\/))([\w\/\-]+)/
      url.match(regex)[1]
+    end
   end
   
   
